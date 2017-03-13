@@ -22,6 +22,13 @@ import serviceLayer.BookStoreServices;
  */
 public class ClintForBookStore {
 
+	private final static int GET_LIST_OF_THE_BOOK=1;
+	private final static int SEARCH_A_BOOK=2;
+	private final static int ADD_A_NEW_BOOK=3;
+	private final static int ADD_TO_MY_BASKET=4;
+	private final static int GET_MY_BASKET=5;
+	private final static int REMOVE_FROM_MY_BASKET=6;
+	private final static int EXIT=7;
 	static String id="";
 	static String serverAddress="";
 	static Scanner line=new Scanner(System.in);
@@ -41,8 +48,8 @@ public class ClintForBookStore {
 
 		int number=bookastore.bookStoryMenu();
 
-		while(number!=7){// 7: is Exit
-			if(number==1){// 1 :Get the list of books
+		while(number!=EXIT){// 7: Exit
+			if(number==GET_LIST_OF_THE_BOOK){// 1 :Get list of THE books
 
 				ArrayList<Book> result ;
 				try {
@@ -64,7 +71,7 @@ public class ClintForBookStore {
 
 
 
-			}else if(number==2){// 2: Search a book
+			}else if(number==SEARCH_A_BOOK){// 2: Search a book
 				System.err.println("Enter Search Item in Title or Author");
 				line.nextLine();
 				String searchItem=line.nextLine();
@@ -83,7 +90,7 @@ public class ClintForBookStore {
 
 
 
-			}else if(number==3){// 3: Add a new book
+			}else if(number==ADD_A_NEW_BOOK){// 3: Add a new book
 				Book book=new Book();
 				System.out.println("Please Enter ISBN of your book");
 				line.nextLine();
@@ -123,7 +130,7 @@ public class ClintForBookStore {
 
 
 
-			}else if(number==4){// 4: Add to Basket
+			}else if(number==ADD_TO_MY_BASKET){// 4: Add to Basket
 				Book book=new Book();
 				System.err.println("Please Enter ISBN of your book to add in your basket");
 				line.nextLine();
@@ -149,7 +156,7 @@ public class ClintForBookStore {
 
 
 
-			}else if(number==5){// 5: Get Basket
+			}else if(number==GET_MY_BASKET){// 5: Get Basket
 
 				ArrayList<Book> result;
 				try {
@@ -166,7 +173,7 @@ public class ClintForBookStore {
 
 
 
-			}else if(number==6){// 6: Remove from Basket
+			}else if(number==REMOVE_FROM_MY_BASKET){// 6: Remove from Basket
 				Book book=new Book();
 				System.err.println("Please Enter ISBN of your book to remove from your basket");
 				line.nextLine();
@@ -268,12 +275,12 @@ public class ClintForBookStore {
 		boolean hasErrorInEnteredMenuNumber=false;
 		do{
 			System.out.println("\nOption menu\nPlease choose a number:\n"
-					+ "1: Get the list of books\n"
+					+ "1: Get list of THE books\n"
 					+ "2: Search a book\n"
 					+ "3: Add a new book\n"
-					+ "4: Add to Basket\n"
-					+ "5: Get Basket\n"
-					+ "6: Remove from Basket\n"
+					+ "4: Add to my Basket\n"
+					+ "5: Get my Basket\n"
+					+ "6: Remove from my Basket\n"
 					+ "7: Exit");
 			try{
 				number=line.nextInt();
