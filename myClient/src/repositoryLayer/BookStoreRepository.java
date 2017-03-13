@@ -24,7 +24,7 @@ import dataModels.Book;
 public class BookStoreRepository {
 	static HttpURLConnection conn;
 	static DataOutputStream wr;
-	
+
 	/**
 	 * sends GET request to web API server and returns response
 	 * @param Ip
@@ -41,26 +41,26 @@ public class BookStoreRepository {
 			Client client = Client.create();
 
 			WebResource webResource = client
-			   .resource(serverAddress.replace(" ", "%20"));
+					.resource(serverAddress.replace(" ", "%20"));
 
 			ClientResponse response = webResource.accept("application/json")
-	                   .get(ClientResponse.class);
+					.get(ClientResponse.class);
 
 			if (response.getStatus() != 200) {
-			   throw new RuntimeException("Failed : HTTP error code : "
-				+ response.getStatus());
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatus());
 			}
 
-			 output = response.getEntity(String.class);
+			output = response.getEntity(String.class);
 
-		  } catch (Exception e) {
+		} catch (Exception e) {
 
 			output="Server Error";
 
-		  }
+		}
 		return output;
 	}
-	
+
 	/**
 	 * sends POST request to web API server and returns response
 	 * @param Ip
@@ -75,10 +75,10 @@ public class BookStoreRepository {
 		String urlParameters;
 		if(controller.equals("add")){
 			urlParameters="{\"title\":\""+book.getTitle()+"\",\"author\":\""+book.getAuthor()+
-							"\",\"price\":"+book.getPrice()+",\"isbn\":\""+book.getISBN()+"\",\"quantity\":"+book.getQuantity()+"}";
+					"\",\"price\":"+book.getPrice()+",\"isbn\":\""+book.getISBN()+"\",\"quantity\":"+book.getQuantity()+"}";
 		}else
 			urlParameters="{\"isbn\":\""+book.getISBN()+"\",\"id\":\""+id+"\"}";
-		
+
 		byte[] postData       = urlParameters.getBytes( StandardCharsets.UTF_8 );
 		int    postDataLength = postData.length;
 		String request        = "http://"+Ip+"/rest/book/"+controller;
@@ -91,28 +91,28 @@ public class BookStoreRepository {
 		conn.setRequestProperty( "charset", "utf-8");
 		conn.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
 		conn.setUseCaches( false );
-		 wr = new DataOutputStream( conn.getOutputStream()) ;
-		   wr.write( postData );
+		wr = new DataOutputStream( conn.getOutputStream()) ;
+		wr.write( postData );
 
-			  int responseCode = conn.getResponseCode();
+		int responseCode = conn.getResponseCode();
 
-				if(responseCode==200){
-					BufferedReader in = new BufferedReader(
-					        new InputStreamReader(conn.getInputStream()));
-					String inputLine;
-					StringBuffer response = new StringBuffer();
-	
-					while ((inputLine = in.readLine()) != null) {
-						response.append(inputLine);
-					}
-					in.close();
-	
-					
-					 result=response.toString();
-				}else result="The book "+book.getISBN()+" already exists";
-				 
-				return result;
-		}
-		
+		if(responseCode==200){
+			BufferedReader in = new BufferedReader(
+					new InputStreamReader(conn.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+
+			result=response.toString();
+		}else result="The book "+book.getISBN()+" already exists";
+
+		return result;
+	}
+
 
 }

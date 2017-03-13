@@ -9,20 +9,20 @@ public class Book {
 	int quantity;
 
 	public Book(){
-		
+
 	}
-	
+
 	public Book(String ISBN,String title,String author,double price ){
 		this.ISBN=ISBN;
 		this.title=title;
 		this.author=author;
 		this.price=price;
 
-		
+
 	}
-	
-	
-	
+
+
+
 	public String getISBN() {
 		return ISBN;
 	}
@@ -49,9 +49,9 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
 
-	
+
+
 	public int getQuantity() {
 		return quantity;
 	}
@@ -61,12 +61,12 @@ public class Book {
 	}
 
 	@Override
-    public String toString() {
-        return  "ISBN=" + ISBN +
-                ", Title='" + title + '\'' +
-                ", Auther='" + author + '\'' +
-                 ", Price='" + price + '\'' ;
-    }
+	public String toString() {
+		return  "ISBN=" + ISBN +
+				", Title='" + title + '\'' +
+				", Auther='" + author + '\'' +
+				", Price='" + price + '\'' ;
+	}
 
 
 }
